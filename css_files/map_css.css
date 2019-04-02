@@ -1,0 +1,33 @@
+#map_svg{
+    border: 1px solid #cccccc;
+    box-shadow: 0 0 8px #cccccc;
+    cursor: pointer;
+}
+#commute_div{
+    width: 100%;
+}
+
+#comm_tbl_div, #pie_div{
+    margin: auto;
+}
+.tile{
+    background: #ffffff;
+    width: 100%;
+    margin: 1%;
+    padding: 1%;
+    box-shadow: 2px 2px 3px #888888;
+}
+.float{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.arc text {
+    font: 10px sans-serif;
+    text-anchor: middle;
+}
+
+.arc path {
+    stroke: #fff;
+}
