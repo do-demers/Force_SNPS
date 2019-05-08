@@ -1,0 +1,9 @@
+line {
+    stroke: #ccc;
+}
+text {
+    text-anchor: middle;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+}
