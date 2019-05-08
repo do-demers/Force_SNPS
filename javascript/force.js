@@ -38,7 +38,7 @@ function drawNet(nodes, links) {
         .force("center", d3.forceCenter(width / 2, height / 2))
         .force("x", d3.forceX(width))
         .force("y", d3.forceY(height))
-        .force("link", d3.forceLink().links(links).distance(50));
+        .force("link", d3.forceLink().links(links).distance(100));
 
     // build a dictionary of nodes that are linked
     var linkedByIndex = {};
