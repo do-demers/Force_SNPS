@@ -1,20 +1,34 @@
 function init() {
     d3.queue()
-        .defer(d3.csv, "data/nodes.csv")
-        .defer(d3.csv, "data/links.csv")
+        .defer(d3.csv, "data/nodes105.csv")
+        .defer(d3.csv, "data/links105.csv")
+        .defer(d3.csv, "data/nodes110.csv")
+        .defer(d3.csv, "data/links110.csv")
         .await(setData);
 }
 
-function setData(error, nodes, links) {
+function setData(error, nodes105, links105, nodes110, links110) {
     if (error)
         throw error;
 
     //Give each node an initial weight. To be changed upon creating links for ease of filtering link-less nodes
-    nodes.forEach(function (d) {
+    nodes105.forEach(function (d) {
         d.weight = 0;
     });
 
-    drawNet(nodes, links);
+    nodes110.forEach(function (d) {
+        d.weight = 0;
+    });
+
+    drawNet(nodes105, links105);
+
+    d3.select("#q105").on("click", function () {
+        drawNet(nodes105, links105);
+    });
+
+    d3.select("#q110b").on("click", function () {
+        drawNet(nodes110, links110);
+    });
 }
 
 function drawNet(nodes, links) {
@@ -22,8 +36,8 @@ function drawNet(nodes, links) {
     d3.select("svg").remove();
 
     var svg_location = "#net";
-    var width = 800;
-    var height = 800;
+    var width = 1000;
+    var height = 1000;
 
     var fill = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -34,11 +48,11 @@ function drawNet(nodes, links) {
 
     //Force layout settings
     var simulation = d3.forceSimulation(nodes)
-        .force("charge", d3.forceManyBody().strength(-100))
+        .force("charge", d3.forceManyBody().strength(-33))
         .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("x", d3.forceX(width))
-        .force("y", d3.forceY(height))
-        .force("link", d3.forceLink().links(links).distance(100));
+        .force("x", d3.forceX(width / 2))
+        .force("y", d3.forceY(height / 2))
+        .force("link", d3.forceLink().links(links).distance(150));
 
     // build a dictionary of nodes that are linked
     var linkedByIndex = {};
