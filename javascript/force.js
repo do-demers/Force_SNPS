@@ -36,8 +36,8 @@ function drawNet(nodes, links) {
     d3.select("svg").remove();
 
     var svg_location = "#net";
-    var width = 1000;
-    var height = 1000;
+    var width = 1100;
+    var height = 820;
 
     var fill = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -48,11 +48,12 @@ function drawNet(nodes, links) {
 
     //Force layout settings
     var simulation = d3.forceSimulation(nodes)
-        .force("charge", d3.forceManyBody().strength(-33))
+        .force("charge", d3.forceManyBody().strength(-850))
         .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("x", d3.forceX(width / 2))
-        .force("y", d3.forceY(height / 2))
-        .force("link", d3.forceLink().links(links).distance(150));
+        .force('collision', d3.forceCollide(30))
+        .force("x", d3.forceX(width / 2).strength(0.75))
+        .force("y", d3.forceY(height / 2).strength(0.75))
+        .force("link", d3.forceLink().links(links).distance(1));
 
     // build a dictionary of nodes that are linked
     var linkedByIndex = {};
@@ -112,10 +113,10 @@ function drawNet(nodes, links) {
             })
             .merge(node)
             .attr("x", function (d) {
-                return d.x;
+                return d.x = Math.max(50,Math.min(width - 50, d.x));
             })
             .attr("y", function (d) {
-                return d.y;
+                return d.y = Math.max(10, Math.min(height - 10, d.y));
             })
             .attr("dy", function (d) {
                 return 5;
