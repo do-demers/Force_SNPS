@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a5e07e20-0a8c-4ffb-bfdc-12a662babc7e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/force.js" afterPath="$PROJECT_DIR$/javascript/force.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,7 +15,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -37,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="force.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="force.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascript/force.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3281">
-              <caret line="193" column="46" lean-forward="false" selection-start-line="193" selection-start-column="46" selection-end-line="193" selection-end-column="46" />
+            <state relative-caret-position="714">
+              <caret line="231" column="82" lean-forward="false" selection-start-line="231" selection-start-column="82" selection-end-line="231" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -631,7 +629,7 @@
       <workItem from="1557422619305" duration="109000" />
       <workItem from="1559571571186" duration="26078000" />
       <workItem from="1560195463040" duration="9147000" />
-      <workItem from="1560349913075" duration="6675000" />
+      <workItem from="1560349913075" duration="7436000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit with 50 most common word connections in SNPS comments. To do:&#10;-Error checking&#10;-Tweak look and feel&#10;-Fix indexing of nodes with goal of removing 0 position placeholder">
       <created>1557322125419</created>
@@ -668,11 +666,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559680683616</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added datatable for accessibility&#10;Minor styling changes">
+      <created>1560362969884</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1560362969884</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50104000" />
+    <option name="totallyTimeSpent" value="50865000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1186" extended-state="6" />
@@ -721,7 +726,8 @@
     <MESSAGE value="Increased link distance to 100" />
     <MESSAGE value="Updated data: q105 and q110b with selector&#10;Fixed performance issue by limiting CSV data&#10;To do: fix forcelayout distance, force, etc..." />
     <MESSAGE value="Added rudimentary collision detection&#10;Added max x, y bounds to stop nodes from flying out of view&#10;Adjusted force factors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added rudimentary collision detection&#10;Added max x, y bounds to stop nodes from flying out of view&#10;Adjusted force factors" />
+    <MESSAGE value="Added datatable for accessibility&#10;Minor styling changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added datatable for accessibility&#10;Minor styling changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -947,18 +953,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/javascript/force.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="714">
+          <caret line="231" column="82" lean-forward="false" selection-start-line="231" selection-start-column="82" selection-end-line="231" selection-end-column="82" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascript/force.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3281">
-          <caret line="193" column="46" lean-forward="false" selection-start-line="193" selection-start-column="46" selection-end-line="193" selection-end-column="46" />
+        <state relative-caret-position="102">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>

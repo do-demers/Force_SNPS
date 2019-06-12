@@ -184,6 +184,7 @@ function prepTable (nodes,links){
 }
 
 function makeTable(data){
+    var commafmt = d3.format(",d");
 
     //Remove existing table
     $('#wordTable').DataTable().destroy();
@@ -228,7 +229,7 @@ function makeTable(data){
             return columns.map(function (column) {
                 return {
                     column: column,
-                    value: row[column]
+                    value: isNaN(row[column])? row[column] : commafmt(row[column])
                 };
             });
         })
