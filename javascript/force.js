@@ -27,6 +27,7 @@ function setData(error, nodes105, links105, nodes110, links110) {
     });
 
     d3.select("#q110b").on("click", function () {
+        console.log("110 click");
         drawNet(nodes110, links110);
     });
 }
@@ -35,9 +36,10 @@ function drawNet(nodes, links) {
     //Remove any existing SVG
     d3.select("svg").remove();
 
+    //SVG for forcelayout
     var svg_location = "#net";
     var width = 1100;
-    var height = 820;
+    var height = 650;
 
     var fill = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -53,7 +55,7 @@ function drawNet(nodes, links) {
         .force('collision', d3.forceCollide(30))
         .force("x", d3.forceX(width / 2).strength(0.75))
         .force("y", d3.forceY(height / 2).strength(0.75))
-        .force("link", d3.forceLink().links(links).distance(1));
+        .force("link", d3.forceLink().links(links).distance(5));
 
     // build a dictionary of nodes that are linked
     var linkedByIndex = {};
@@ -65,6 +67,8 @@ function drawNet(nodes, links) {
     function isConnected(a, b) {
         return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
     }
+
+    prepTable(nodes,links);
 
     simulation.on("tick", ticked);
 
@@ -102,7 +106,7 @@ function drawNet(nodes, links) {
         //Filter nodes by weight
         var node = svg
             .selectAll("text")
-            .data(nodes.filter(function (d) {
+                .data(nodes.filter(function (d) {
                 return d.weight == 1;
             }));
 
@@ -160,4 +164,86 @@ function drawNet(nodes, links) {
         updateLinks();
         updateNodes();
     }
+}
+
+function prepTable (nodes,links){
+    //Add table for accessibility
+    var tableData = [];
+    var i;
+
+    //Get source, target, freq of nodes and links
+    for (i = 0; i<links.length;i++){
+        console.log(links[i].source);
+        tableData[i] = new Object();
+        tableData[i].source = links[i].source.id;
+        tableData[i].target = links[i].target.id;
+        tableData[i].freq = links[i].freq;
+
+    }
+    makeTable(tableData);
+}
+
+function makeTable(data){
+
+    //Remove existing table
+    $('#wordTable').DataTable().destroy();
+    d3.selectAll("table").remove();
+
+    //Create table
+    var columns = ["source", "target", "freq"];
+    var headers = ["Source word", "Target word", "Frequency"];
+
+    var table = d3.select("#table")
+        .append("table")
+        .attr("id","wordTable")
+        .attr("class", "table table-striped table-hover");
+
+    var thead = table.append('thead');
+
+    var tbody = table.append('tbody');
+
+    thead.append('tr')
+        .attr("class", "active")
+        .selectAll('th')
+        .data(headers)
+        .enter()
+        .append('th')
+        .text(function (column) {
+            return column;
+        });
+
+    var rows_grp = tbody
+        .selectAll('tr')
+        .data(data);
+
+    var rows_grp_enter = rows_grp
+        .enter()
+        .append('tr')
+    ;
+
+    rows_grp_enter.merge(rows_grp);
+
+    rows_grp_enter.selectAll('td')
+        .data(function (row) {
+            return columns.map(function (column) {
+                return {
+                    column: column,
+                    value: row[column]
+                };
+            });
+        })
+        .enter()
+        .append('td')
+        .html(function (d) {
+                return d.value;
+            }
+        )
+    ;
+
+
+    $('#wordTable').DataTable( {
+        paging: true,
+        "order": [[ 2, "desc" ]]
+    } );
+
 }
