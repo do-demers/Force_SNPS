@@ -1,3 +1,4 @@
+
 function init() {
     d3.queue()
         .defer(d3.csv, "data/nodes105.csv")
@@ -23,17 +24,27 @@ function setData(error, nodes105, links105, nodes110, links110) {
     drawNet(nodes105, links105);
 
     d3.select("#q105").on("click", function () {
-        drawNet(nodes105, links105);
+        d3.select("svg").transition()
+            .delay(function (d, i) {
+                return i * 10;
+            })
+            .duration(500)
+            .style('opacity', 0)
+            .on('end', drawNet(nodes105, links105));
     });
 
     d3.select("#q110b").on("click", function () {
-        console.log("110 click");
-        drawNet(nodes110, links110);
+        d3.select("svg").transition()
+            .delay(function(d,i) { return i * 10; })
+            .duration(500)
+            .style('opacity', 0)
+            .on('end', drawNet(nodes110, links110));
     });
 }
 
 function drawNet(nodes, links) {
-    //Remove any existing SVG
+
+    //remove old SVG
     d3.select("svg").remove();
 
     //SVG for forcelayout
@@ -41,12 +52,19 @@ function drawNet(nodes, links) {
     var width = 1100;
     var height = 650;
 
-    var fill = d3.scaleOrdinal(d3.schemeCategory10);
-
     //Create SVG
     var svg = d3.select(svg_location).append("svg")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .style('opacity', 0);
+
+
+    var fill = d3.scaleOrdinal(d3.schemeCategory10);
+
+    svg.transition()
+        .delay(function(d,i) { return i * 10; })
+        .duration(1000)
+        .style('opacity', 1);
 
     //Force layout settings
     var simulation = d3.forceSimulation(nodes)
@@ -173,7 +191,6 @@ function prepTable (nodes,links){
 
     //Get source, target, freq of nodes and links
     for (i = 0; i<links.length;i++){
-        console.log(links[i].source);
         tableData[i] = new Object();
         tableData[i].source = links[i].source.id;
         tableData[i].target = links[i].target.id;
@@ -248,3 +265,5 @@ function makeTable(data){
     } );
 
 }
+
+//Add SVG transition fade upon changing data/question choice
