@@ -1,4 +1,3 @@
-
 function init() {
     d3.queue()
         .defer(d3.csv, "data/nodes105.csv")
@@ -30,15 +29,21 @@ function setData(error, nodes105, links105, nodes110, links110) {
             })
             .duration(500)
             .style('opacity', 0)
-            .on('end', drawNet(nodes105, links105));
+            .on('end', function () {
+                drawNet(nodes105, links105)
+            });
     });
 
     d3.select("#q110b").on("click", function () {
         d3.select("svg").transition()
-            .delay(function(d,i) { return i * 10; })
+            .delay(function (d, i) {
+                return i * 10;
+            })
             .duration(500)
             .style('opacity', 0)
-            .on('end', drawNet(nodes110, links110));
+            .on('end', function () {
+                drawNet(nodes110, links110)
+            });
     });
 }
 
@@ -62,7 +67,9 @@ function drawNet(nodes, links) {
     var fill = d3.scaleOrdinal(d3.schemeCategory10);
 
     svg.transition()
-        .delay(function(d,i) { return i * 10; })
+        .delay(function (d, i) {
+            return i * 10;
+        })
         .duration(1000)
         .style('opacity', 1);
 
@@ -86,7 +93,7 @@ function drawNet(nodes, links) {
         return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
     }
 
-    prepTable(nodes,links);
+    prepTable(nodes, links);
 
     simulation.on("tick", ticked);
 
@@ -124,7 +131,7 @@ function drawNet(nodes, links) {
         //Filter nodes by weight
         var node = svg
             .selectAll("text")
-                .data(nodes.filter(function (d) {
+            .data(nodes.filter(function (d) {
                 return d.weight == 1;
             }));
 
@@ -135,7 +142,7 @@ function drawNet(nodes, links) {
             })
             .merge(node)
             .attr("x", function (d) {
-                return d.x = Math.max(50,Math.min(width - 50, d.x));
+                return d.x = Math.max(50, Math.min(width - 50, d.x));
             })
             .attr("y", function (d) {
                 return d.y = Math.max(10, Math.min(height - 10, d.y));
@@ -184,13 +191,13 @@ function drawNet(nodes, links) {
     }
 }
 
-function prepTable (nodes,links){
+function prepTable(nodes, links) {
     //Add table for accessibility
     var tableData = [];
     var i;
 
     //Get source, target, freq of nodes and links
-    for (i = 0; i<links.length;i++){
+    for (i = 0; i < links.length; i++) {
         tableData[i] = new Object();
         tableData[i].source = links[i].source.id;
         tableData[i].target = links[i].target.id;
@@ -200,7 +207,7 @@ function prepTable (nodes,links){
     makeTable(tableData);
 }
 
-function makeTable(data){
+function makeTable(data) {
     var commafmt = d3.format(",d");
 
     //Remove existing table
@@ -213,7 +220,7 @@ function makeTable(data){
 
     var table = d3.select("#table")
         .append("table")
-        .attr("id","wordTable")
+        .attr("id", "wordTable")
         .attr("class", "table table-striped table-hover");
 
     var thead = table.append('thead');
@@ -246,7 +253,7 @@ function makeTable(data){
             return columns.map(function (column) {
                 return {
                     column: column,
-                    value: isNaN(row[column])? row[column] : commafmt(row[column])
+                    value: isNaN(row[column]) ? row[column] : commafmt(row[column])
                 };
             });
         })
@@ -259,10 +266,10 @@ function makeTable(data){
     ;
 
 
-    $('#wordTable').DataTable( {
+    $('#wordTable').DataTable({
         paging: true,
-        "order": [[ 2, "desc" ]]
-    } );
+        "order": [[2, "desc"]]
+    });
 
 }
 
